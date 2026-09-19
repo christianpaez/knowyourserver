@@ -4,4 +4,4 @@ title: About
 permalink: /about/
 ---
 
-This is a reference site I build to remember all things VPS/Linux.
+This is a reference site I build to remember all things VPS/Linux related.
