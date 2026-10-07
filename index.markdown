@@ -4,3 +4,17 @@
 
 layout: home
 ---
+
+# Know Your Server
+{: .fs-9 }
+
+A practical reference for Linux, Kubernetes, PostgreSQL, and server stuff.
+
+## Articles
+
+{% for post in site.posts %}
+### [{{ post.title }}]({{ post.url }})
+
+{{ post.excerpt }}
+
+{% endfor %}

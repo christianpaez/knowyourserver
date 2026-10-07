@@ -1,0 +1,31 @@
+---
+layout: post
+title:  "Kind: simple start"
+date:   2026-09-17 00:04:26 -0500
+categories: [kind, kubernetes] 
+---
+Kind stands for Kubernetes in Docker, it’s a fantastic way to run a cluster on your local machine, it works on Mac, WSL, Arch and Alpine(I have tried it in all of those).
+A common issue I found was that in order to setup ingress we need to make sure the kind node container has the proper ports mapped to the host and if you do not create your kind cluster with those already you may have to tear down your cluster and start over. This happened to me enough times to write a cluster config yml down here:
+
+```yaml
+# cluster.yml
+
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+
+name: somecluster
+
+nodes:
+  - role: control-plane
+    extraPortMappings:
+      - containerPort: 80
+        hostPort: 18080
+      - containerPort: 443
+        hostPort: 18443
+
+  - role: worker
+  - role: worker
+```
+
+That’s the only file you need, after that just run `kind create cluster --config cluster.yml` and you are good to go. 
+Note: 2 worker nodes and single control-plane is what I have seen in most places called a ‘production’ k8s setup.
